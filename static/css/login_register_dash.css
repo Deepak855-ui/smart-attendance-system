@@ -47,6 +47,25 @@ button:hover {
     transform: scale(1.05);
 }
 
+input{
+    background-color: #f9fcff;
+    color: rgb(0, 0, 0);
+    padding: 12px 24px;
+    border-radius: 8px;
+    border: none;
+    margin: 10px 0;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+h2 {
+    text-shadow: 0 0 10px white;
+    font-size: 2rem;
+    /* font-size: 25px; */
+    }
+
 /* ✅ Responsive Design */
 @media (max-width: 480px) {
     h1 {
