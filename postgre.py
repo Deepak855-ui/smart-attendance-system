@@ -49,7 +49,7 @@ db = pymysql.connect(
                      database="defaultdb",
                      port= 12298,
                      ssl_disabled= False,
-                     ssl_ca= 'C:\Users\darsh\OneDrive\Documents\Desktop\ca.pem'  # You'll need to download this file from Aiven!
+                     ssl_ca= './ca.pem'  
                      )
 cursor = db.cursor()
 
