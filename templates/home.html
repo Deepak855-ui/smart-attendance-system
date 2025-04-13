@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SBSSU | Smart Attendance System</title>
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <style>
+        /* General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            /* background: linear-gradient(45deg, #ff0066, #6600ff); */
+            
+            /* background: linear-gradient(45deg, #ff0066, #6600ff); */
+            color: white;
+            text-align: center;
+            height: 100%;
+        }
+
+        /* Navbar */
+        /* Navbar */
+        .navbar {
+            background: linear-gradient(180deg, orange, white, green);       
+            display: flex;
+            padding: 10px 20px;
+            justify-content: center; /* Center everything horizontally */
+            align-items: center; /* Center items vertically */
+            position: relative;
+            height: 100px;
+            
+        }
+        /* Logo */
+        .logo {
+        height: 80px; /* Adjust as needed */
+        margin: 0 20px; /* Space between logo and menus */
+        }
+
+/* Left and Right Menu */
+.left-menu, .right-menu {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* Left Menu - Aligned to Left */
+.left-menu {
+    justify-content: flex-end;
+    flex: 1; /* Pushes menu to the left */
+}
+
+/* Right Menu - Aligned to Right */
+.right-menu {
+    justify-content: flex-start;
+    flex: 1; /* Pushes menu to the right */
+}
+
+/* Navbar Menu Items */
+.navbar ul li {
+    margin: 0 15px; /* Space between menu items */
+}
+
+/* Navbar Links */
+.navbar ul li a {
+    color: navy;
+    text-shadow: 0px 0px 4px green;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 18px;
+    padding: 8px 12px;
+    transition: color 0.3s ease-in-out;
+}
+
+.navbar ul li a:hover {
+    color: gold;
+}
+
+       
+        /* Hero Section */
+        .hero {
+            padding: 50px 20px;
+            padding-top: 5px;
+            text-align: center;
+        }
+        .hero h1 {
+            color: navy;
+            font-size: 3rem;
+            text-shadow: 0 0 10px rgb(85, 95, 237);
+        }
+        .hero p {
+            color: navy;
+
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+        /* Notice Board */
+        .notice-board {
+            background: rgb(17, 3, 94);
+            /* background: linear-gradient(180deg, orange, white, green);  */
+
+            color: red;
+            font-size: 20px;
+            font-weight: bold;
+            padding: 10px;
+            margin: 20px auto;
+            width: 90%;
+            border-radius: 10px;
+            border: 2px solid red;
+            box-shadow: 0 0 15px red;
+            text-align: center;
+        }
+        marquee {
+            font-family: 'Courier New', Courier, monospace;
+        }
+        /* Quick Links */
+        .quick-links {
+            margin: 20px auto;
+            width: 80%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .quick-links a {
+            background: gold;
+            color: black;
+            padding: 10px 15px;
+            margin: 5px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .quick-links a:hover {
+            background:orange;
+            /* background: rgb(255, 255, 255); */
+            transform: scale(1.1);
+            /* border: 1px dotted green; */
+        }
+        /* Footer */
+        .footer {
+            background:rgb(2, 2, 95);
+            padding: 15px;
+            /* margin-top: 20px; */
+            margin-top:10%;
+        }
+        .footer p {
+            margin: 5px;
+            color: white;
+        }
+
+        button{
+            background-color:#0dcaf0;
+            padding: 15px;
+            border-start-end-radius: 10px;
+            border: white;
+            margin: 1rem;
+            font-weight: bold;
+            font-size:15px;
+        }
+        button:hover{
+            background-color:orange;
+            transform:scale(1.1);
+            box-shadow: 2px 2px 5px white ;
+        }
+    </style> -->
+</head>
+<body>
+
+    <!-- Navbar -->
+<div class="navbar">
+    <ul class="left-menu">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Academics</a></li>
+    </ul>
+
+    <img src="{{ url_for('static', filename='images/logo2.png') }}" alt="SBSSU Logo" class="logo">
+
+    <ul class="right-menu">
+        <li><a href="#">Admissions</a></li>
+        <li><a href="#">Placements</a></li>
+        <li><a href="#">Contact</a></li>
+    </ul>
+</div>
+
+<!-- Quick Links -->
+<div class="quick-links">
+    <a href="#">Admission Form</a>
+    <a href="#">Academic Calendar</a>
+    <a href="#">Syllabus</a>
+    <a href="#">Fee Structure</a>
+    <a href="#">Placement Cell</a>
+    <a href="#">Library</a>
+</div>
+
+  
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <h1>Welcome to Shaheed Bhagat Singh State University</h1>
+        <p>Empowering students with quality education and innovation.</p>
+        
+            <p>Registration is required only once. After that, simply log in to continue using the system!</p>
+
+
+
+        <p style="color: black;">👉 Step 1: Register Here 📝</p>
+        <a href="{{url_for('register')}}"><button id="register">Register</button></a>
+        <p style="color: black;">👉 Step 2: Log In Here 🔑</p>
+
+        <a href="{{url_for('login_section')}}"><button id="login">Login</button></a>
+    </div>
+
+    <!-- Scrolling Notice Board -->
+            
+                <!-- <div class="notice-board"> -->
+
+                <fieldset>
+                <legend style="color: red;">NOTICE 📢</legend>
+
+        <marquee behavior="scroll" direction="left" scrollamount="7">
+            ⚠️   Attention Students! To access the Smart Attendance System, you must first register your account. Once registered, you can log in to mark your attendance and track your records.Admissions for 2025 are now open! Apply now. | SBSSU Convocation on March 10, 2025 | Stay updated with all official announcements here! 📢
+        </marquee></fieldset>
+    <!-- </div> -->
+
+    
+    <!-- Footer -->
+     <!-- <footer>
+    <div class="footer">
+        <a href="#top" style="text-decoration: none;"><button>Back to Top  </button></a>  
+
+        <p>📍 Location: SBS State Technical University, Punjab</p>
+        <p>📞 Contact: +91 12345 67890 | ✉ Email: info@sbssu.ac.in</p>
+        <p>© 2025 SBSSU | All Rights Reserved</p>
+    </div>
+</footer> -->
+
+<footer>
+    <div class="foot-panel1">
+  <button><a href="#top" style="text-decoration: none;">Back to Top  </a></button>  
+  </div>
+             <div class="foot-panel2">
+       <ul>
+
+            <p>Departments</p>
+            <a>Architecture</a>
+            <a>App. Sc. & Hum</a>
+            <a>EnggWing - CE, CHE</a>
+            <a>EnggWing - EE, ME</a>
+            <a>EnggWing - CSE,CSE( Data Sci.)</a>
+            <a>EnggWing - ECE</a>
+            <a>PolyWing - ALL</a>
+            <a>Comp. Applst</a>
+
+       </ul>
+
+       <ul>
+
+          <p> Administration</p>
+          <a>Vice Chancellor</a>
+          <a>Society</a>
+          <a>Authorities</a>
+          <a>Governance</a>
+          <a>Academkic Council Meeting</a>
+          <a>Committees</a>
+          <a>RTI Cell</a>
+          <a>By-Laws</a>
+
+     </ul>
+
+     <ul>
+
+      <p> Get to Know Us</p>
+      <a>Computer Center</a>
+      <a>Library</a>
+      <a>Press Releases</a>
+      <a>Workshop</a>
+      <a>Sports</a>
+      <a>&#10009;Helth Center</a>
+      <a>📌Notices</a>
+      <a>Question Paper Templates</a>
+
+ </ul>
+
+ <ul>
+
+  <p> <h3>Shaheed Bhagat Singh State University</h3></p>
+  <a>About Us</a>
+  <a>Contact </a>
+  <a>📞 Contact: +91 12345 67890 &#9743; | </a>
+  <a> ✉ Email:info@sbssu.ac.in</a>
+  <a>&#127758;Shaheed Bhagat Singh State University Moga Road (NH-95), Ferozepur-152004 (Punjab) India</a>
+  <a href="#" class="fa fa-facebook"></a>
+  <a href="#" class="fa fa-twitter"></a>
+  <a href="#" class="fa fa-linkedin"></a>
+  <a href="https://www.instagram.com/deep_xmalwa?utm_source=qr&igsh=MWNwMGF6eGJob2trOA== " class="fa fa-instagram"></a>
+
+ 
+  
+
+</ul>
+             </div>
+
+      
+             <div class="foot-panel3">
+
+              <div class="foot-logo">
+
+              </div>
+             </div>
+
+                    <div class="foot-panel4">
+                                 <div class="pages">
+                                           <a>condition of use</a>
+                                           <a>📞 Support Contact: +91 7986851245</a>
+                                           <a> ✉ Email: imdeep2810@gmail.com</a>
+                                 </div>
+                             <div class="copyright">
+                                © 2025 SBSSU | Support Provided by Deepak
+                             </div>
+                </div>
+
+</footer>
+
+</body>
+</html>

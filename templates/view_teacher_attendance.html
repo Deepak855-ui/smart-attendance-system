@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="UTF-8">
+    <title>Teacher Attendance View</title>
+    <!-- <link rel="stylesheet" href="{{url_for('static', filename='css/view_teacher_attendance.css')}}"> -->
+<style>
+     
+   /* General Styling */
+   body {
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+/* Main Container */
+.container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 40px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Box (User Inputs) */
+.form-box {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+/* Form Title */
+.form-box h3 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+/* Search & Filter Fields */
+.input-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+/* Input Fields */
+input[type="text"], input[type="date"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 220px;
+    margin-bottom: 5px;
+}
+label{
+    margin-top: 5rem;
+}
+
+/* Button Styling */
+button {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+/* Search Icon */
+button img {
+    width: 18px;
+    height: 18px;
+    margin-left: 8px;
+}
+
+/* Button Hover */
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Loader (Spinner) */
+.loader {
+    display: none;
+    margin: 10px auto;
+    border: 4px solid #ddd;
+    border-top: 4px solid #007bff;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+}
+
+/* Loader Animation */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Table Styling */
+.table-container {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th, td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .input-group {
+        flex-direction: column;
+    }
+
+    input[type="text"], input[type="date"] {
+        width: 100%;
+    }
+}
+
+/* back to dashboard  */
+
+/* Center "Back to Dashboard" Link */
+.dashboard-btn-container {
+    display: flex;
+    justify-content: center;  /* Center horizontally */
+    align-items: center;      /* Center vertically */
+    margin-top: 30px;
+    height: 100px;  /* Adjust height for vertical centering */
+}
+
+/* Remove underline from the link */
+.dashboard-btn-container a {
+    text-decoration: none;
+}
+
+/* Button Styling */
+.dashboard-btn-container a button {
+    padding: 12px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.dashboard-btn-container a button:hover {
+    background-color: #0056b3;
+}
+
+/* ✅ Responsive Design for Small Screens */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+        padding: 15px;
+    }
+
+    .input-group {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    input, button {
+        width: 100%;
+    }
+
+    table {
+        font-size: 14px;
+    }
+
+    th, td {
+        padding: 8px;
+    }
+}
+
+/* ✅ Center "Back to Dashboard" Button */
+.dashboard-btn-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.dashboard-btn-container a button {
+    width: 200px;
+}
+
+</style>
+   <script>
+ function searchAttendance() {
+    return new Promise((resolve) => {
+        document.getElementById("loader").style.display = "block"; // Show loader
+        setTimeout(() => {
+            let input = document.getElementById("searchInput").value.toLowerCase();
+            let rows = document.getElementsByTagName("tr");
+
+            for (let i = 1; i < rows.length; i++) {
+                let rollNo = rows[i].getElementsByTagName("td")[1]; // Roll No is in the 2nd column
+                if (rollNo) {
+                    let textValue = rollNo.textContent || rollNo.innerText;
+                    rows[i].style.display = textValue.toLowerCase().includes(input) ? "" : "none";
+                }
+            }
+            document.getElementById("loader").style.display = "none"; // Hide loader
+            resolve();
+        }, 1000); // Simulate a delay of 1 second
+    });
+
+}
+
+// ******* script for real time no. of student counting and live updates ********
+
+function updateAttendanceCount() {
+    let selectedDate = document.getElementById("date").value;
+    if (!selectedDate) return;
+    
+    fetch(`/get_attendance_count?date=${selectedDate}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.count !== undefined) {
+                document.getElementById("attendance-count").innerText = data.count;
+            } else {
+                document.getElementById("attendance-count").innerText = "Error";
+            }
+        })
+        .catch(error => console.error("Error fetching attendance count:", error));
+}
+
+// Auto-update if today’s date is selected
+setInterval(() => {
+    let selectedDate = document.getElementById("date").value;
+    let today = new Date().toISOString().split("T")[0];
+    if (selectedDate === today) {
+        updateAttendanceCount();
+    }
+}, 1000); // Refresh every 1 seconds
+
+
+
+
+</script>
+</head>
+
+<body>
+    <div class="container">
+    <!-- <h2>Student Attendance Records for {{ session.get("teacher_name", "Unknown Teacher") }}</h2> -->
+
+    <h1>Search & Filter attendance :</h1>
+    <!-- <h2>Attendance Debug Data:</h2> -->
+<!-- <pre>{{ attendance_records }}</pre>  Print raw data -->
+
+ <!-- Form Box for Search & Filters -->
+ <div class="form-box">
+    <!-- <h3>Search & Filter Attendance</h3> -->
+
+    <!-- Search Input -->
+    <div class="input-group">
+    
+    <input type="text" id="searchInput" placeholder="Enter Roll No...">
+    <button onclick="searchAttendance()" style="text-align: right; justify-content: space-between; padding: none; word-spacing: 250px, 20px;"> Search &#10148;<p style="text-align: right;">&#128269;</p>
+        <!-- Search <img src="https://cdn-icons-png.flaticon.com/512/622/622669.png" alt="Search"> -->
+    </button>
+<!--     
+    <div class="search-box">
+        <input type="text" placeholder="Search..." id="searchInput">
+        <button type="submit" onclick="searchAttendance()">
+            <img src="{{ url_for('static', filename='images/search-icon.png') }}" alt="🔍">
+        </button>
+    </div> -->
+
+   
+    
+    <!-- view_teacher_attendance.html (Frontend with Live Counter) -->
+
+<label for="date">Select Date:</label>
+<input type="date" id="date" name="date" onchange="updateAttendanceCount()">
+
+<h3>Total Students Present: <span id="attendance-count" style="color: rgb(38, 0, 255); border: 2px solid rgb(0, 204, 255); padding: 5px; font-weight: bolder;">0</span></h3>
+
+
+</div>
+
+    <div id="loader" class="loader"></div>
+    
+    <form method="POST" action="{{ url_for('view_teacher_attendance') }}">
+        <label for="date" style="font-weight: bold;">Select Date:</label>
+        <input type="date" id="date" name="date">
+        
+        <label for="roll_no" style="font-weight: bold;">Enter Roll No:</label>
+        <input type="text" id="roll_no" name="roll_no" placeholder="Enter Roll No">
+
+        <button type="submit">Filter</button>
+    </form>
+</div>
+
+<!-- Attendance Table -->
+<div class="table-container">
+    <div class="table-container">
+        <!-- ✅ Export Button -->
+<div style="text-align: right; margin-bottom: 10px;">
+<button onclick="exportTableToExcel('attendanceTable')">📥 Export to Excel</button>
+</div>
+
+    {% if attendance_records %}
+    <table id="attendanceTable">
+        <caption>Attendance Records</caption>
+        <tr>
+            <th>Student Name</th>
+            <th>Roll No</th>
+            <th>Subject</th>
+            <th>Date</th>
+            <th>Status</th>
+        </tr>
+        {% for record in attendance_records %}
+        <tr>
+            <td>{{ record['student_name'] }}</td>
+            <td>{{ record['roll_no'] }}</td>
+            <td>{{ record['subject'] }}</td>
+            <td>{{ record['formatted_date'] }}</td>
+            <td>{{ record['status'] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <p style="color: red; font-size: 18px;">No attendance records found.</p>
+    {% endif %}
+</div>
+
+    <br>
+    <!-- Centered "Back to Dashboard" Button -->
+<div class="dashboard-btn-container">
+    <a href="/teacher_dashboard">
+        <button>Back to Dashboard</button>
+    </a>
+</div>
+
+</div>
+
+<!-- script for download attendance record as excel file -->
+<script>
+    function exportTableToExcel(tableID, filename = 'attendance.xlsx') {
+        const dataType = 'application/vnd.ms-excel';
+        const tableSelect = document.getElementById(tableID);
+        const tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+    
+        const downloadLink = document.createElement("a");
+        document.body.appendChild(downloadLink);
+    
+        downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+        downloadLink.download = filename.replace('.xlsx', '.xls');
+        downloadLink.click();
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login for smart Attendance</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login_register_dash.css') }}">
+
+    <!-- <style>
+        body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(45deg, #ff0066, #6600ff);
+    color: white;
+    text-align: center;
+} 
+
+h2 {
+    text-shadow: 0 0 10px white;
+    font-size: 3rem;
+}
+
+input {
+    padding: 10px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+button {
+    background: gold;
+    color: black;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: white;
+    color: black;
+    transform: scale(1.1);
+
+    border-radius: 50px;
+
+} 
+
+
+.login-container, #create {
+    width: 40rem;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    box-shadow: 0px 0px 5rem 0.1rem rgb(255, 196, 1);
+    align-items: center;
+    border-radius: 7rem;
+    margin-top: 25%;
+}
+    </style> -->
+</head>
+<body>
+
+    <h3>Login your account for smart attendace  Account</h3>
+
+   <div id="create">
+   
+   <a href="{{url_for('teacher_login')}}"> <button id="teacher" style="margin: 15px;  ">Teacher</button> </button></a> 
+ 
+    <br>
+    <a href="{{url_for('student_login')}}"><button id="student" style="margin: 15px, ;">Stundent</button> </button></a>
+
+    <br>
+
+
+    
+</div>
+</body>
+<!-- <script>
+    document.getElementById("teacher").onclick = function() {
+        window.location.href = "teacher_registration.html"; // Link to your game template
+    };
+
+    document.getElementById("student").onclick = function() {
+        window.location.href = "student_regitration.html"; // Link to your game template
+    };
+</script> -->
+</html>
+

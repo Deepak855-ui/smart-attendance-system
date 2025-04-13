@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration</title>
+    <link rel="stylesheet" href="static/css/std_reg.css">
+   
+    <!-- <style>
+    
+        body {
+            background-image: url('static/images/std.jpg'); /* Optional: Add a background image */
+             /* Optional: Add a background image */
+            background-size: cover; /* Cover the entire viewport */
+            background-position: center; /* Center the image */
+            display: flex;
+            justify-content:center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .form-container {
+            background-color: rgba(59, 154, 186, 0.336) ; /* White with 90% opacity */
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* 3D shadow effect */
+            width: 400px;
+            text-align: left;
+            margin-top: 8rem;
+            padding-top: 8rem;
+            backdrop-filter: blur(5px);
+            position: relative;
+            z-index: 2;
+            
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: white;
+            /* text-shadow: 0px 0px 5px 2px goldenrod; */
+        
+            font-size: 3rem;
+            text-shadow: 0 0 10px white;
+}
+            /* color: #333; */
+    
+
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+            color: white;
+            font-size: large;
+            /* color: #555; */
+        }
+        input:hover,select:hover{
+            box-shadow: 0 0 10px 2px rgb(255, 255, 255);
+        }  
+
+
+
+        input[type="text"],
+        input[type="email"],
+        input[type="number"],
+        input[type="password"],
+        input[type="file"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0 20px;
+            border: 1px solid #ccccccb8;
+            border-radius: 5px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="number"]:focus,
+        select:focus {
+            border-color: #007BFF; /* Change border color on focus */
+            outline: none; /* Remove default outline */
+        }
+
+        button[type="submit"] {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+            font-size: 16px;
+            font-weight: bolder;
+            text-shadow: 0 0 5px white;
+
+            margin: 5px;
+        }
+
+        button:hover {
+            box-shadow: 0 0 10px 2px white;
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+
+        button[type="button"] {
+            background-color: #28a745; /* Green for Send OTP */
+        }
+
+        button[type="button"]:hover {
+            box-shadow: 0 0 10px 2px white;
+            background-color: #218838; /* Darker green on hover */
+        }
+
+
+        img:hover{
+            box-shadow: 0 0 10px 2px white;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .input-group input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccccccb8;
+            border-radius: 5px;
+        }
+
+        .input-group button {
+            position: absolute;
+            right: 5px;
+            padding: 8px 12px;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .input-group button:hover {
+            background-color: #0056b3;
+        }
+
+        .otp-verified {
+            background-color: lightgreen !important;
+            padding: 5px;
+            border-radius: 5px;
+            display: none;
+            text-align: center;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .otp-failed {
+            background-color: lightcoral !important;
+        }
+        .hidden {
+            display: none;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 3;
+        }
+
+        .loader {
+            border: 6px solid #f3f3f3;
+            border-top: 6px solid #3498db;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            /* display: none;
+            margin-left: 10px; */
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+    </style> -->
+
+</head>
+<body>
+    <!-- <div id="loaderOverlay" class="hidden">
+        <div class="loader-container">
+            <div class="loader-icon"></div>
+            <div class="loader-ring"></div>
+        </div>
+        </div>  -->
+
+    <div class="overlay" id="loadingOverlay">
+        <div class="loader"></div>
+        <div class="loader-icon"></div>
+        <div class="loader-ring"></div>
+    </div>
+
+
+    <div class="form-container">
+        <h1>Student Registration</h1>
+        <form method="POST" action="/register_student" enctype="multipart/form-data">
+            <label>Full Name:</label>
+            <input type="text" name="name" placeholder="Full name" required>
+
+            <br>
+            <label>Email:<span id="email-msg" style="font-size: 14px;"></span></label> 
+            <div class="input-group">
+                <input type="email" name="email" id="email" placeholder="Enter Email" required onkeyup="checkEmail()">
+                
+
+                <button type="button" id="sendOTPButton" onclick="sendOTP()">Send otp ➤</button>
+                <!-- <div id="loader" class="loader"></div> -->
+            </div>
+
+           
+            <span id="otpMessage" class="otp-verified">OTP sent to your email. Verify it.</span>
+           
+            <div id="otpSection" class="hidden">
+            <label>OTP Verification:</label>
+            <div class="input-group">
+                <input type="text" name="otp" id="otp" placeholder="Enter OTP" required>
+                <button type="button" onclick="verifyOTP()">Verify otp ✔</button>
+            </div>
+            </div>
+           
+            <div id="extraFields" class="hidden">
+            <label for="rollno">Roll No:</label>
+            <input type="text" name="rollno" placeholder="2220..." required>
+
+            <br>
+            <label>Passsword :</label>
+            <input type="password" name="password" placeholder="Create Attendance password" required>
+            
+<br>
+            <label>Phone Number:</label>
+            <input type="text" name="phone" placeholder="PHone no." required>
+
+            
+            <br>
+            <label>Profile Picture:</label>
+            <!-- <input type="file" name="profile_picture" required> -->
+            <input type="file" name="profile_picture" id="profile_picture" accept="image/*" required onchange="previewImage(event)">
+            <br>
+            <img id="profile_preview" src="#" alt="Profile Preview" style="display: none; width: 100px; height: 100px; border-radius: 50%; border: 2px solid #fff;">
+            <br>
+<br>
+        
+
+            <label>Department:</label>
+            <select name="department">
+                <option style="text-align: center;">--Select Department</option>
+                <option>Computer Aplication</option>
+                <option>B-tech</option>
+                <option>Bsc</option>
+                <option>B-com</option>
+                <option>B-arch</option>
+                <option>Electrical Diploma</option>
+
+            </select>
+<br>
+            <label>Semester</label>
+            <input type="number" name="sem" placeholder="Enter your Semester" required>
+        
+<br>
+            <button type="submit">Register</button></div>
+        </form>                           
+    </div>
+
+
+
+<!-- Script for Preview Image Before Upload -->
+
+<script>
+
+function previewImage(event) {
+    let reader = new FileReader();
+    reader.onload = function () {
+        let preview = document.getElementById('profile_preview');
+        preview.src = reader.result;
+        preview.style.display = "inline-block";
+    };
+    reader.readAsDataURL(event.target.files[0]);
+}
+   
+    // To manage an opt 
+        function sendOTP(button) {     
+            // button.disabled = true;
+            let email = document.getElementById("email").value;
+            let overlay = document.getElementById("loadingOverlay");
+            // let loader = document.querySelector(".loader");
+            let otpMessage = document.getElementById("otpMessage");
+            let otpSection = document.getElementById("otpSection");
+            // let button = document.querySelector("button[onclick='sendOTP()']");
+
+
+            if (email === "") {
+                alert("Please enter your email first.");
+                return;
+            }
+
+            // Disable the button to prevent multiple requests
+       
+
+            overlay.style.display ="flex";
+            // loader.style.display = "block";
+
+            fetch("/send_otp", {
+                method: "POST",
+                body: JSON.stringify({ email: email }),
+                headers: { "Content-Type": "application/json" }
+            })
+            .then(response => response.json())
+            .then(data => {
+                // alert(data.message || data.error);
+                overlay.style.display = "none";
+                // button.disabled = false; // Enable button after request completion
+
+                if (data.error) {
+                    alert(data.error);
+                
+                }else{
+                document.getElementById("otpMessage").style.display = "block";
+                document.getElementById("otpSection").classList.remove("hidden");}
+            });
+        }
+
+
+        function adjustContainerHeight() {
+    const formContainer = document.querySelector('.form-container');
+    formContainer.style.minheight = '100vh';
+    formContainer.style.height = 'auto'; // Allow it to expand further if needed
+}
+
+
+        function verifyOTP() {
+        let otp = document.getElementById("otp").value;
+        let overlay = document.getElementById("loadingOverlay");
+        if (otp === "") {
+            alert("Please enter the OTP.");
+            return;
+        }
+        
+        console.log("🔍 Sending OTP to server:", otp);  // Debugging
+
+        fetch("/verify_otp", {
+            method: "POST",
+            body: JSON.stringify({ otp: otp }),
+            headers: { "Content-Type": "application/json" }
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("🔍 Server Response:", data);  // Debugging
+            let otpField = document.getElementById("otp");
+            if (data.verified) {
+                alert("✅ OTP Verified Successfully!");
+                document.getElementById("extraFields").classList.remove("hidden");
+                // document.getElementById("registerBtn").classList.remove("hidden");
+                otpField.classList.add("otp-verified");
+                otpField.classList.remove("otp-failed");
+                adjustContainerHeight(); // ✅ Expand Form to Full Height
+
+            } else {
+                console.error("OTP Verification Error:", error);
+
+                alert("Invalid OTP. Please try again.");
+                otpField.classList.add("otp-failed");
+                otpField.classList.remove("otp-verified");
+            }
+        }) 
+        .catch(error => {
+            // console.error("OTP Verification Error:", error);
+            alert("An error occurred while verifying OTP. Please try again.");
+        });;
+    }
+    
+// check email is exist in database or not 
+function checkEmail() {
+    const email = document.getElementById("email").value;
+    if (email.length > 5) {
+        fetch(`/check_email?email=${email}`)
+        .then(res => res.json())
+        .then(data => {
+            const msg = document.getElementById("email-msg");
+            if (data.exists) {
+                msg.textContent = "❌ Email already registered";
+                msg.style.color = "red";
+            } else {
+                msg.textContent = "✅ Email available";
+                msg.style.color = "green";
+            }
+        });
+    }
+}
+
+
+</script>
+</body>
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+    <div class="login-container">
+        <h2>Teacher Dashboard Login</h2>
+        <form method="POST">
+            <input type="text" name="roll_no" placeholder="Roll No" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</body>
+</html> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <h2>Student Dashboard</h2>
+    <form method="POST" action="/submit_attendance">
+        <input type="text" name="otp" placeholder="Enter OTP" required>
+        <button type="submit">Submit Attendance</button>
+    </form>
+</body>
+</html> -->

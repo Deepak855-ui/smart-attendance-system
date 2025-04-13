@@ -1,0 +1,287 @@
+   /* General Styling */
+   body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    /* background: linear-gradient(45deg, #ff0066, #6600ff); */
+    
+    /* background: linear-gradient(45deg, #ff0066, #6600ff); */
+    color: white;
+    text-align: center;
+    height: 100%;
+}
+
+/* Navbar */
+/* Navbar */
+.navbar {
+    background: linear-gradient(180deg, orange, white, green);       
+    display: flex;
+    padding: 10px 20px;
+    justify-content: center; /* Center everything horizontally */
+    align-items: center; /* Center items vertically */
+    /* position: relative; */
+    height: 100px;
+    
+}
+/* Logo */
+.logo {
+height: 80px; /* Adjust as needed */
+margin: 0 20px; /* Space between logo and menus */
+}
+
+/* Left and Right Menu */
+.left-menu, .right-menu {
+list-style: none;
+display: flex;
+align-items: center;
+margin: 0;
+padding: 0;
+}
+
+/* Left Menu - Aligned to Left */
+.left-menu {
+justify-content: flex-end;
+flex: 1; /* Pushes menu to the left */
+}
+
+/* Right Menu - Aligned to Right */
+.right-menu {
+justify-content: flex-start;
+flex: 1; /* Pushes menu to the right */
+}
+
+/* Navbar Menu Items */
+.navbar ul li {
+margin: 0 15px; /* Space between menu items */
+}
+
+/* Navbar Links */
+.navbar ul li a {
+color: navy;
+text-shadow: 0px 0px 4px green;
+text-decoration: none;
+font-weight: bold;
+font-size: 18px;
+padding: 8px 12px;
+transition: color 0.3s ease-in-out;
+}
+
+.navbar ul li a:hover {
+color: gold;
+}
+
+
+/* Hero Section */
+.hero {
+    padding: 50px 20px;
+    padding-top: 5px;
+    text-align: center;
+}
+.hero h1 {
+    color: navy;
+    font-size: 3rem;
+    text-shadow: 0 0 10px rgb(85, 95, 237);
+}
+.hero p {
+    color: navy;
+
+    font-size: 1.2rem;
+    /* margin-top: 10px; */
+}
+/* Notice Board */
+.notice-board {
+    background: rgb(17, 3, 94);
+    /* background: linear-gradient(180deg, orange, white, green);  */
+
+    color: red;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px;
+    margin: 20px auto;
+    width: 90%;
+    border-radius: 10px;
+    border: 2px solid red;
+    box-shadow: 0 0 15px red;
+    text-align: center;
+}
+marquee {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: yellow;
+    color: red;
+}
+/* Quick Links */
+.quick-links {
+    margin: 20px auto;
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.quick-links a {
+    background: gold;
+    color: black;
+    padding: 10px 15px;
+    margin: 5px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+.quick-links a:hover {
+    background:orange;
+    /* background: rgb(255, 255, 255); */
+    transform: scale(1.1);
+    /* border: 1px dotted green; */
+}
+/* Footer */
+/* .footer {
+    background:rgb(2, 2, 95);
+    padding: 15px;
+    margin-top:10%;
+}
+.footer p {
+    margin: 5px;
+    color: white;
+} */
+
+button[id="register"], button[id="login"]{
+    background-color: #0dcaf0;
+    padding: 10px;;
+    border-start-end-radius: 10px;
+    border:none;
+    margin: 1rem;
+    font-weight: bold;
+    font-size:15px;
+}
+/* {
+    background-color:#0dcaf0;
+    padding: 15px;
+    border-start-end-radius: 10px;
+    border: white;
+    margin: 1rem;
+    font-weight: bold;
+    font-size:15px;
+} */
+button:hover{
+    background-color:orange;
+    transform:scale(1.1);
+    box-shadow: 2px 2px 5px white ;
+}
+
+footer{
+    margin-top: 1rem;
+}
+.foot-panel1{
+    text-decoration: none;
+    background-color: #37475a;
+color:white;
+height:50px;
+/* width:100vw; */
+display:flex;
+justify-content: center;
+align-items: center;
+font-size: 0.87rem;
+}
+
+.foot-panel2{
+  
+    background-color: #222f3d;
+    color: rgb(214, 209, 243);
+    height: 300px;
+    display: flex;
+    justify-content:space-evenly;
+    
+
+}
+ul{
+    margin-top:10px;
+    padding: 0;
+}
+ul a{
+    display: block;
+    font-size: 0.85rem;
+    margin-top:10px;
+}
+
+.foot-panel3{
+    background-color:#222f3d;
+    color: white;
+    border-top:1px solid white ;
+    height:70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.foot-logo{
+    background-image: url( '../images/dperis.png');
+background-size:cover;
+height: 65px;
+width: 100px;
+}
+
+.foot-panel4{
+    background-color:rgb(24, 24, 50);
+    color: white;
+    height: 70px;
+    font-size: 0.7rem;
+    text-align: center;
+
+}
+
+.fa {
+    padding: 20px;
+    font-size: 30px;
+    width: 18px;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px 2px;
+    border-radius: 50%;
+
+  }
+  
+.fa:hover {
+      opacity: 0.7;
+  }
+  
+.fa-facebook {
+    background: #3B5998;
+    color: white;
+  }
+.fa-twitter {
+    background: #55ACEE;
+    color: white;
+  }
+  
+.fa-linkedin {
+    background: #007bb5;
+    color: white;
+  }
+  
+.fa-instagram {
+    background:linear-gradient(195deg,rgb(221, 0, 255),rgb(247, 2, 104),yellow);
+    /* background: #125688; */
+
+    color: white;
+  }
+  
+ 
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar { flex-direction: column; height: auto; }
+    .logo { height: 60px; width: 100%; display:inline-block ; }
+    .left-menu, .right-menu { justify-content: center; margin-top: 10px; }
+    .navbar ul li a { font-size: 16px; }
+    .hero h1 { font-size: 2rem; }
+    .hero p { font-size: 1rem; }
+    .quick-links { width: 100%; }
+    button { font-size: 14px; padding: 8px 16px; }
+}
+
+@media (max-width: 480px) {
+    .navbar ul li a { font-size: 14px; }
+    .hero h1 { font-size: 1.8rem; }
+    .hero p { font-size: 0.9rem; }
+    button { font-size: 12px; padding: 6px 12px; }
+    .foot-panel2 { flex-direction: column; align-items: center; height: auto; justify-content: center; }
+}

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>smart Attendance system</title>
+<!-- Set style of home page  -->
+    <style>
+.note{
+    color: red;
+}
+body {
+    font-family: Arial, sans-serif;
+    /* background: linear-gradient(90deg, #e8d722, #9500ff); */
+    background: linear-gradient(45deg, #ff0066, #6600ff);
+    color: white;
+    text-align: center;
+} 
+
+h2 {
+    text-shadow: 0 0 10px white;
+    font-size: 3rem;
+    /* font-size: 25px; */
+}
+
+input {
+    padding: 10px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+button {
+    background: gold;
+    color: black;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: white;
+    color: black;
+    transform: scale(1.1);
+    border-radius: 5px;
+} 
+.notice-board {
+        background: black;
+        color: red;
+        font-size: 20px;
+        font-weight: bold;
+        padding: 10px;
+        margin: 20px auto;
+        width: 90%;
+        border-radius: 10px;
+        border: 2px solid red;
+        box-shadow: 0 0 15px red;
+        text-align: center;
+    }
+
+    marquee {
+        font-family: 'Courier New', Courier, monospace;
+    }
+
+    </style>
+
+</head>
+<body>
+    
+    <div id="sbslogo"> 
+        <img src="{{url_for('static', filename='images/logo2.png')}}" alt="Shaheed Bhagat Singh State Tecnical University">
+    </div>
+    <div class="notice-board">
+        <marquee behavior="scroll" direction="left" scrollamount="7">
+            ⚠️ NOTICE: Welcome to the Smart Attendance System! Please register and log in to mark attendance. Stay updated with all announcements here! 📢
+        </marquee>
+    </div>
+    <h1><p class="note">NOTE :</h1>
+    
+        <ul></ul><li>Login if your are not register</li>
+    
+        <li>Firstly register your account.</li>
+
+        <li>After registeration you login your account</li></ul></p>
+
+        <a href="{{url_for('register')}}"><button>Registration</button></a>
+        <a href="{{url_for('login_section')}}"><button>Login</button></a>
+
+</html>

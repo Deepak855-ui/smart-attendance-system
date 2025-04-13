@@ -1,0 +1,114 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: linear-gradient(45deg, #ff0066, #6600ff);
+
+}
+
+
+
+.schedule-container {
+    text-align: center;
+    margin-top: 20px;
+        
+        
+    
+}
+
+.day-button {
+    background: linear-gradient(45deg, #007bff, #00d4ff);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    margin: 5px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 4px 10px rgba(0, 123, 255, 0.3);
+}
+
+.day-button:hover,button:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 6px 15px rgba(0, 123, 255, 0.5);
+}
+h1{
+    color: white;
+    padding-top: 10px;
+    font-family:Arial, Helvetica, sans-serif ;
+    text-shadow: 0 0 10px white;
+}
+h3, h4{
+
+    /* padding: 15px; */
+    margin-top: 5%;
+    color: white;
+    font-size: 1.5rem;
+    font-family:Arial, Helvetica, sans-serif ;
+    text-shadow: 0 0 10px white;
+}
+/* h4{
+    font-size: 1rem;
+    text-shadow: 0 0 10px white;
+color: wheat;
+} */
+.schedule {
+    /* margin-top: 20px;
+    margin: auto;
+    padding:auto;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    color: white;
+    text-align: center;
+    display: none;
+    box-shadow:0 0 2rem 5px white ;
+    /* justify-content: space-between; */
+   /* display:inline-block;
+
+    justify-content: space-between;
+    display:inline-block;
+    width:auto;
+    height: auto; */
+
+    justify-content:center;
+    display:inline-block;
+    width:auto;
+    /* height: auto; */
+
+    border-radius: 20px;
+    /* margin: 1rem; */
+    box-shadow: 0px 0px 20px 2px  white ;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    background: linear-gradient(45deg, #ff0066, #6600ff);
+    /* padding: 4%;   */
+}
+
+.lecture-time{
+    border-radius: 20%;
+    margin: 1rem;
+    box-shadow: 0px 0px 20px 2px  white ;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    background: linear-gradient(45deg, #ff0066, #6600ff);
+    padding: 20px;
+    
+      
+}
+
+.lab{
+    justify-content: space-between;
+    display:inline-block;
+    width:auto;
+    height: auto;
+
+    border-radius: 20%;
+    margin: 1rem;
+    box-shadow: 0px 0px 20px 2px  white ;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    background: linear-gradient(45deg, #ff0066, #6600ff);
+    padding: 4%;  
+
+}

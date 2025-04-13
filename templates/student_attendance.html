@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Attendance</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+<style>
+          body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 15px;
+            background-image: url('/static/images/std.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            width: 100%;
+            max-width: 420px;
+            padding: 25px;
+            border-radius: 12px;
+            background-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: left;
+            animation: fadeIn 1.0s ease-in-out;
+            backdrop-filter: blur(3px);
+            
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input, button {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            display: block;
+            box-sizing: border-box;
+        }
+        input[readonly] {
+            background-color: #e9ecef;
+            cursor: not-allowed;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        /* body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+            background-image: url('/static/images/std.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: rgba(249, 249, 249, 0.9);
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            /* background-color: #f9f9f9; */
+        /* } 
+        /* input, button {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            display: block;
+        }
+        
+        input[readonly] {
+            background-color: #e9ecef;
+            cursor: not-allowed;
+        } */ 
+
+        /* go to dashboard button  */
+        .dashboard-btn-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.dashboard-btn-container a {
+    text-decoration: none;
+}
+
+.dashboard-btn-container button {
+    padding: 12px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.dashboard-btn-container button:hover {
+    background-color: #0056b3;
+}
+
+    </style>
+</head>
+<body>
+
+    <!-- go to dashboard button -->
+    <div class="dashboard-btn-container">
+        <a href="/student_dashboard">
+            <button>Go to Dashboard</button>
+        </a>
+    </div>
+    
+
+    <div class="container">
+        <h2>Submit Attendance</h2>
+        <form action="/submit_attendance" method="POST">
+            <label for="student_name">Student Name:</label>
+            <input type="text" id="student_name" name="student_name" value="{{ student_name}}" readonly>
+            
+            <label for="roll_no">Roll No:</label>
+            <input type="text" id="roll_no" name="roll_no" value="{{roll_no}}" readonly>
+            
+            <label for="datetime">Date & Time:</label>
+            <input type="text" id="datetime" name="datetime" value="{{ datetime }}" readonly>
+            
+            <label for="subject">Subject:</label>
+            <input type="text" id="subject" name="subject"  value="{{ subject }}" readonly>
+            
+            <label for="teacher_name">Teacher Name:</label>
+            <input type="text" id="teacher_name" name="teacher_name" value="{{ teacher_name }}" readonly>
+
+            <label for="code">Enter 6-Digit Code:</label>
+            <input type="text" id="code" name="code" maxlength="6" required>
+            <p id="countdown" style="font-size: 18px; font-weight: bold; color: red;"></p>
+            
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Fetch student details and autofill fields
+            fetch("/get_student_details")
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("Server error: " + response.statusText);
+        }
+        return response.json(); 
+    })
+    .then(data => {
+        if (data.error) {
+            console.error("Error:", data.error);
+        } else {
+            document.getElementById("student_name").value = data.name;
+            document.getElementById("roll_no").value = data.roll_no;
+            document.getElementById("datetime").value = data.datetime;
+        }
+    })
+    .catch(error => console.error("Error fetching student details:", error));
+            });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            let subject = document.getElementById("subject").value; // Get subject name
+            
+        fetch(`/get_code_expiry?subject=${subject}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.expires_at) {
+                    startCountdown(data.expires_at);
+                }
+            })
+            .catch(error => console.error("Error fetching code expiry:", error));
+    });
+
+    function startCountdown(expiryTimestamp) {
+        let countdownDisplay = document.getElementById("countdown");
+
+        function updateCountdown() {
+            let now = Math.floor(Date.now() / 1000);
+            let remainingTime = Math.floor(expiryTimestamp - now); // Remove milliseconds
+
+
+            if (remainingTime <= 0) {
+                countdownDisplay.innerHTML = "⏳ Code Expired!";
+                return;
+            }
+
+            let minutes = Math.floor(remainingTime / 60);
+            let seconds = remainingTime % 60;
+            countdownDisplay.innerHTML = `Time Left: ${minutes}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    }
+
+    </script>
+</body>
+</html>

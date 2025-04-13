@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>My Attendance</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Main Container */
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 40px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Form Box */
+        .form-box {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        /* Search & Filter Section */
+        .input-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        /* Input Fields */
+        input[type="text"], input[type="date"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            width: 220px;
+        }
+
+        /* Button Styling */
+        button {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        /* Search Icon */
+        button img {
+            width: 18px;
+            height: 18px;
+            margin-left: 8px;
+        }
+
+        /* Button Hover */
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Loader (Spinner) */
+        .loader {
+            display: none;
+            margin: 10px auto;
+            border: 4px solid #ddd;
+            border-top: 4px solid #007bff;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+        }
+
+        /* Loader Animation */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Table */
+        .table-container {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        /* Center "Back to Dashboard" Button */
+        .dashboard-btn-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        /* Remove underline & style the button */
+        .dashboard-btn-container a {
+            text-decoration: none;
+        }
+
+        .dashboard-btn-container button {
+            padding: 12px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .dashboard-btn-container button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .input-group {
+                flex-direction: column;
+            }
+
+            input[type="text"], input[type="date"] {
+                width: 100%;
+            }
+        }
+    </style>
+
+    <script>
+        function searchAttendance() {
+            return new Promise((resolve) => {
+                let loader = document.getElementById("loader");
+                loader.style.display = "block"; // Show loader
+
+                setTimeout(() => {
+                    let input = document.getElementById("searchInput").value.toLowerCase();
+                    let rows = document.querySelectorAll("table tr");
+
+                    rows.forEach((row, index) => {
+                        if (index === 0) return; // Skip table header
+                        let subjectCell = row.getElementsByTagName("td")[0];
+                        if (subjectCell) {
+                            let textValue = subjectCell.textContent || subjectCell.innerText;
+                            row.style.display = textValue.toLowerCase().includes(input) ? "" : "none";
+                        }
+                    });
+
+                    loader.style.display = "none"; // Hide loader
+                    resolve();
+                }, 1000);
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>My Attendance</h2>
+
+        <!-- Form Box for Search & Filters -->
+        <div class="form-box">
+            <h3>Search & Filter Attendance</h3>
+
+       
+
+
+            <!-- Search Input -->
+            <div class="input-group">
+
+                <!-- <input type="text" id="searchInput" placeholder="Enter Subject Name..."> -->
+                
+                       <!-- Filter Form -->
+              <form method="POST" action="{{ url_for('view_student_attendance') }}">
+                <div class="input-group">
+                    <!-- ✅ Subject Dropdown (Prevents Spelling Mistakes) -->
+                    <select name="subject" style="height:35px;">
+                        <option value="">-- Select Subject --</option>
+                        {% for subject in subjects %}
+                            <option value="{{ subject }}">{{ subject }}</option>
+                        {% endfor %}
+                    </select>
+
+                <button onclick="searchAttendance()">
+                    Search <img src="https://cdn-icons-png.flaticon.com/512/622/622669.png" alt="Search">
+                </button>
+            </div> 
+
+            <!-- Loader -->
+            <div id="loader" class="loader"></div>
+
+            <!-- Filter Form -->
+            <form method="POST" action="{{ url_for('view_student_attendance') }}">
+                <div class="input-group">
+                    <input type="date" id="date" name="date">
+                    <button type="submit">Filter</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Attendance Table -->
+        <div class="table-container">
+            <!-- ✅ Export Button -->
+<div style="text-align: right; margin-bottom: 10px;">
+    <button onclick="exportTableToExcel('attendanceTable')">📥 Export to Excel</button>
+</div>
+
+            {% if student_attendance %}
+            <table id="attendanceTable">
+               
+                <tr>
+                    <th>Name</th>
+                    <th>Subject</th>
+                    <th>Teacher</th>  <!-- Added Teacher Column -->
+                    <th>Date</th>
+                    <th>Status</th>
+                </tr>
+                {% for record in student_attendance %}
+                <tr>
+                    <td>{{ record['student_name'] }}</td> <!-- Display Student Name -->
+                    <td>{{ record['subject'] }}</td>
+                    <td>{{ record['teacher_name'] }}</td>  <!-- Display Teacher Name -->
+                    <td>{{ record['formatted_date'] }}</td><!-- Uses formatted date -->
+                    <td>{{ record['status'] }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% else %}
+            <p>No attendance records found.</p>
+            {% endif %}
+        </div>
+
+        <br>
+        <!-- Centered "Back to Dashboard" Button -->
+        <div class="dashboard-btn-container">
+            <a href="/student_dashboard">
+                <button>Back to Dashboard</button>
+            </a>
+        </div>
+    </div>
+
+
+<!-- script for download attendance record as excel file -->
+    <script>
+        function exportTableToExcel(tableID, filename = 'attendance.xlsx') {
+            const dataType = 'application/vnd.ms-excel';
+            const tableSelect = document.getElementById(tableID);
+            const tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+        
+            const downloadLink = document.createElement("a");
+            document.body.appendChild(downloadLink);
+        
+            downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+            downloadLink.download = filename.replace('.xlsx', '.xls');
+            downloadLink.click();
+        }
+        </script>
+        
+</body>
+</html>

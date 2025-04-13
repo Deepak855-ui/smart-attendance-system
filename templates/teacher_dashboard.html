@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>teacher_dashboard</title>
+
+
+
+<style>
+
+
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+.login-container, #create {
+    width: 40rem;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    box-shadow: 0px 0px 5rem 0.1rem rgb(255, 196, 1);
+    align-items: center;
+    border-radius: 7rem;
+    margin-top: 25%;
+}
+
+button {
+    background-color: blue;
+    color: white;
+    padding: 10px;
+}
+
+/* Teacher button  */
+
+#teacher,#student{
+    border-radius: 5rem;
+    box-shadow:0 0 2rem 5px white ;
+    margin: 5rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ************************************************************************* */
+body {
+    font-family: Arial, sans-serif;
+    /* background: linear-gradient(45deg, #ff0066, #6600ff); */
+    background: rgb(253, 253, 255) ;
+    /* color: white; */
+    color: rgb(21, 9, 9);
+
+    text-align: center;
+} 
+
+.led-clock {
+    text-align:end;
+    margin-right: 75%;
+    text-align: center;
+  /* font-family: 'Orbitron', sans-serif; */
+  /* font-family:"Lucida Console", "Courier New", monospace; */
+  font-family: 'press start 2p', monospace;
+  /* color: #0ff; */
+  color: rgb(163, 5, 5);
+  font-size: 20px;
+  /* text-shadow: 0 0 20px #0ff, 0 0 30px #0ff; */
+  /* background-color: rgba(0, 0, 0, 0.8); */
+  background-color: rgba(128, 128, 128, 0.626);
+  padding: 10px;
+  border-radius: 15px;
+  /* border: 3px solid #0ff; */
+  animation: glow 2s infinite alternate;
+}
+/* 
+@keyframes glow {
+  0% { text-shadow: 0 0 20px #0ff, 0 0 30px #0ff;
+       border: 3px solid rgb(255, 0, 0); }
+
+   20%{border:3px solid rgb(255, 238, 0);}
+   40%{border:3px solid rgb(0, 255, 64);}
+   
+
+  50% { text-shadow: 0 0 30px #0ff, 0 0 40px #0ff; 
+    border: 3px solid rgb(0, 195, 255);}
+
+    60%{border:3px solid rgb(0, 30, 255);}
+    80%{border:3px solid rgb(238, 0, 255);}
+
+  100% { text-shadow: 0 0 20px #0ff, 0 0 30px #0ff; 
+    border:3px solid rgb(255, 0, 0);}
+} */
+
+ h2 {
+    /* text-shadow: 0 0  2px rgba(249, 247, 247, 0.479); */
+    /* font-size: 3rem; */
+    font-size: 2em; /* Adjust as needed */
+  font-weight: bold;
+  font-family: sans-serif; /* Or your preferred font */
+  display: inline-block; /* Essential for gradient on text */
+  background: linear-gradient(to right, #4285F4, #FFA07A); /* Blue to light orange */
+  -webkit-background-clip: text; /*Clip background to text  */
+  background-clip: text; /* Standard property */
+  -webkit-text-fill-color: transparent; /* Make text transparent to show gradient */
+  white-space: nowrap;
+} 
+
+input {
+    padding: 10px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+button  {
+    background: gold;
+    color: black;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+    margin: 10px;
+    border-radius: 7px;
+}
+
+button:hover {
+    /* border-radius:50px; */
+    background: rgb(235, 138, 69);
+    color: black;
+    transform: scale(1.1);
+    
+} 
+
+
+
+
+
+
+/* <-------------- project css----------> */
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #333;
+        padding: 10px 20px;
+        
+    }
+    .navbar h2 {
+        color: white;
+        margin: 0;
+    }
+    .profile {
+        display: flex;
+        align-items: center;
+        position: relative;
+    }
+    .profile img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 10px;
+        /* transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease, border-radius 0.3s ease; */
+
+    }
+    /* .profile img:hover{ */
+    /* transform: scale(2.5); ✅ Expands without affecting navbar */
+    /* width: 80px;
+    height: 80px;
+    border-radius: 0px;
+    position: absolute; */
+    /* z-index: 10; ✅ Ensures it appears above the navbar */
+    /* margin-top: 50%;
+
+    } */
+    .logout-btn {
+        background-color:red;
+        color: white;
+        padding: 8px 12px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .logout-btn:hover {
+        background-color: darkred;
+    }
+
+
+
+
+
+
+/* AFTER STUDENT NAVBAR  */
+        .flash-message {
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+        .success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .danger { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+
+        #lgbtn{
+            color: rgb(0, 0, 0);
+            background-color: red;
+                         }
+        #lgbtn:hover{
+            background-color: blue;
+            color: #c3e6cb;
+            
+        }
+
+        .flash-message button {
+             background: none;
+             border: none;
+             font-size: 16px;
+             margin-left: 10px;
+             cursor: pointer;
+           }
+
+                   /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+  /* Dropdown container */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+    margin-left: 10px;
+  }
+  
+  /* Dropdown button style */
+  .dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 14px;
+    font-size: 16px;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+  }
+  
+        /* dropdown content */
+         
+  /* Dropdown menu content */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0; /* Opens to right */
+    top: 100%;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border-radius: 10px;
+    z-index: 1;
+  }
+  
+  /* Dropdown links */
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .dropdown-content a:hover {
+    background-color: #f1f1f1;
+  }
+  
+  
+  /* Show menu on hover OR click */
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  .dropdown-content.show {
+    display: block;
+  }
+  
+       
+        /* ------------------- MObile Responsive Styles ------------------- */
+        @media (max-width: 1024px) {
+    body{
+        justify-content: center;
+    }
+    .login-container, #create {
+      width: 60%;
+      margin-top: 20%;
+      padding: 15px;
+      border-radius: 4rem;
+    }
+  
+    .led-clock {
+      margin-right: 60%;
+      font-size: 18px;
+      padding: 8px;
+    }
+  
+    #teacher, #student {
+      margin: 3rem;
+      box-shadow: 0 0 1.5rem 3px white;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .login-container, #create {
+      width: 80%;
+      margin-top: 30%;
+      padding: 12px;
+      border-radius: 3rem;
+    }
+  
+    .led-clock {
+      margin-right: 30%;
+      font-size: 16px;
+    }
+  
+    h2 {
+      font-size: 1.5em;
+    }
+  
+    #teacher, #student {
+      margin: 2rem;
+      box-shadow: 0 0 1rem 2px white;
+    }
+  
+    .modal-content {
+      width: 95%;
+    }
+  }
+  option{
+    color: black;
+  }
+  
+  @media (max-width: 480px) {
+    .login-container, #create {
+      width: 90%;
+      margin-top: 40%;
+      padding: 10px;
+      border-radius: 2rem;
+    }
+  
+    .led-clock {
+      margin-right: 10%;
+      font-size: 14px;
+      padding: 6px;
+    }
+  
+    h2 {
+      font-size: 1.2em;
+    }
+  
+    input, button {
+      width: 90%;
+      font-size: 1em;
+    }
+  
+    .navbar {
+      display: inline-block;
+      flex-direction: row;
+      align-items: flex-start;
+    }
+  
+    .navbar h2 {
+      margin-bottom: 10px;
+    }
+  
+    .profile {
+      justify-content: flex-start;
+    }
+  
+    .logout-btn {
+      margin-top: 10px;
+    }
+  
+    #teacher, #student {
+      margin: 1rem;
+      padding: 5px;
+    }
+  }
+    </style>
+</head>
+<body>
+    <!-- ✅ Navbar with Profile Picture & Name -->
+<div class="navbar">
+    <!-- <a href="/edit_teacher_profile"><button class="profile-btn">Edit Profile</button></a> -->
+
+    <div class="profile">
+        {% if session['teacher_profile_pic'] %}
+
+        <!-- <p>Debug Image URL: {{ url_for('static', filename='uploads/' + session['teacher_profile_pic']) }}</p> -->
+            <!-- <img src="{{ url_for('static', filename='uploads/' + session.get('teacher_profile_pic', 'default.png')) }}" alt="Profile"> -->
+            <img src="{{ url_for('static', filename='uploads/' + session['teacher_profile_pic']) }}" alt="Profile">
+
+        {% else %}
+            <img src="{{ url_for('static', filename='uploads/default.png') }}" alt="Default Profile">
+        {% endif %}
+        <span style="color:white;">{{ session.get('teacher_name', 'Teacher') }}</span>
+    </div>
+    <!-- <a href="/view_teacher_attendance"><button>View Student Attendance</button></a> -->
+    <h2>Teacher Dashboard</h2>
+
+    <!-- <a href="/logout"><button class="logout-btn">Logout</button></a> -->
+
+
+
+    
+<div class="dropdown">
+    <button class="dropbtn">
+      ☰ Menu
+    </button>
+    
+    <div class="dropdown-content">
+      <a href="#" class="other">Dashboard</a>
+    <a href="/edit_teacher_profile">Edit Profile</a>
+      <!-- <a href="#" class="other">Settings</a> -->
+    <a href="/view_teacher_attendance">View Student Attendance</a>
+            
+      <!-- Logout ⏻ -->
+            <a href="logout"><button class="logout-btn">  <img style="width: 30px;" src="{{ url_for('static', filename='images/shutdown.png') }}" alt="Default Profile"></button></a>
+    </div>
+  </div>
+</div>
+
+ <!-- Modal for profile picture preview -->
+ <div id="profilePicModal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="profilePicPreview">
+</div>
+<!-- <h1>Teacher dashbord</h1>
+
+
+<a  href="/logout"><button id="lgbtn">Logout</button></a>
+
+ -->
+
+
+
+<!-- SCHEDULE VIEW OF TEACHER  -->
+      <!-- ✅ Display Flash Messages -->
+      {% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+    <div class="flash-container">
+        {% for category, message in messages %}
+            <div class="flash-message {{ category }}">
+                {{ message }}
+                <button onclick="closeFlashMessage()">×</button>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+{% endwith %}
+
+  <p><span id="current-time" class="led-clock"> {{ current_time }} </span> </p>
+
+    <div class="schedule-container">
+        <button class="day-button" onclick="showSchedule('monday')">Monday</button>
+        <button class="day-button" onclick="showSchedule('tuesday')">Tuesday</button>
+        <button class="day-button" onclick="showSchedule('wednesday')">Wednesday</button>
+        <button class="day-button" onclick="showSchedule('thursday')">Thursday</button>
+        <button class="day-button" onclick="showSchedule('friday')">Friday</button>
+    </div>
+    
+    <!-- Code Display Section -->
+    {% if current_code and expires_at %}
+    <div class="code-box">
+        <p>Generated Code: <strong>{{ current_code }}</strong></p>
+        <strong><p id="countdown" style="color: red;">Expires in: <span id="expiry-time">{{ expires_at }}</span></p></strong>
+</div>
+{% endif %}
+
+  
+    <!-- Lecture Schedule Sections -->
+    <div id="monday" class="schedule" style="display: none;">
+         <h1>Monday's Lectures</h1>
+
+      
+         <a href="/generate-code?time=09:00-10:00&subject=MPD6&teacher=Ms.Reena Verma&teacher_id={{ session['teacher_id'] }}"><button class="lecture-time"><h4>09:00 - 10:00</h4> <br> MPD6 <br> Ms.Reena Verma <br> G-304</button></a>
+        <!-- <a href="/generate-code?time=09:00-10:00&subject=MPD6&teacher=Ms.Reena"><button class="lecture-time"><h4>09:00 - 10:00</h4> <br> MPD6 <br> ms.Reena <br> G-304</button></a> -->
+       
+        <br>
+
+        <a href="/generate-code?time=10:00-11:00&subject=Microprocessor&teacher=Mr.I Gill&teacher_id={{ session['teacher_id'] }}"><button class="lecture-time"><h4>10:00 - 11:00</h4> <br> Microproseccor <br> Mr.I Gill <br> G-304</button></a>
+        <br>
+
+        <div class="lab">
+                    <h4>11:00 - 01:00</h4>
+
+                    <a href="/generate-code?time=11:00-01:00&subject=ML_Lab&teacher=Ms.Bindu&teacher_id={{ session['teacher_id'] }}"> <button class="lecture-time">G1 <br> ML_Lab <br> Ms.Bindu <br> Computation Lab</button></a>        
+                        <a href="/generate-code?time=11:00-10:00&subject=Mproject&teacher_id={{ session['teacher_id'] }}"> <button class="lecture-time">G2 <br> Mproject <br> Project I/O <br> CC Lab 3 </button></a>        
+                    
+        </div>
+        <br>
+
+
+        <a href="/generate-code?time=20:00-03:00&subject=Android&teacher=Ms.Meenu&teacher_id={{ session['teacher_id'] }}"><button class="lecture-time"><h4>02:00 - 03:00</h4> <br> Android <br> Ms. Meenu <br> G-304</button></a>
+        <br>
+
+        <a href="/generate-code?time=03:00-04:00&subject=AI&teacher=Ms.Abhilasha&teacher_id={{ session['teacher_id'] }}"><button class="lecture-time"><h4>03:00 - 04:00</h4> <br> AI <br> Ms. Abhilasha <br> G-304</button></a>
+        <br>
+
+        <a href="/generate-code?time=04:00-05:00&subject=ML&teacher=Ms.Bindu&teacher_id={{ session['teacher_id'] }}"><button class="lecture-time"><h4>04:00 - 05:00</h4> <br> ML <br> Ms. Bindu <br> G-304</button></a>
+        <br>
+
+    </div>
+    
+
+<!-- Tuesday -->
+    <div id="tuesday" class="schedule" style="display: none;">
+        <h3>Tuesday's Lectures</h3>
+       <!-- <ul> 
+           <li>9:00 AM - Mathematics</li>
+           <li>11:00 AM - Computer Science</li>
+       </ul> -->
+
+       <a href="/generate-code?time=09:00-10:00&subject=AI&teacher=Ms.Abhilasha&teacher_id={{ session['teacher_id'] }}"><button class="lecture-time"><h4>09:00 - 10:00</h4> <br> AI <br> Ms.Abhilasha <br> G-304</button></a>
+       <br>
+
+       <a href="/generate-code?time=10:00-11:00&subject=Microprocessor&teacher=Mr.I Gill&teacher_id={{ session['teacher_id'] }}"><button class="lecture-time"><h4>10:00 - 11:00 </h4> <br> Microproseccor <br> Mr.I Gill <br> G-304</button></a>
+       <br>
+
+       <div class="lab">
+        <h4>11:00 - 01:00</h4>
+
+        <a href="/generate-code?time=11:00-01:00&subject=Android Lab&teacher=Ms.Meenu&teacher_id={{ session['teacher_id'] }}"><button class="lecture-time">G1 <br> Android_LAb <br> Ms.Meenu <br> CC Lab 3</button></a>        
+        <a href="/generate-code?time=11:00-01:00&subject=ML Lab&teacher=Ms.Bindu&teacher_id={{ session['teacher_id'] }}"><button class="lecture-time">G2 <br> ML_LAb <br> Ms.Bindu <br> Computation Lab</button></a>        
+                
+        
+        </div>
+        <br>
+
+
+        <a href="/generate-code?time=20:00-03:00&subject=-x-&teacher=-x-"><button class="lecture-time"><h4>02:00 - 03:00 <br> -x- </h4> </button></a>
+       <br>
+
+       <div class="lab">
+        <h4>03:00 - 05:00</h4>
+
+        <a href="/generate-code?time=03:00-05:00&subject=ML Lab DBMS Lab&teacher=Ms.Bindu&teacher_id={{ session['teacher_id'] }}"><button class="lecture-time">G1 <br> ML_LAb DBMS Lab <br> Ms.Bindu <br> Computation Lab</button></a>        
+
+        <a href="/generate-code?time=03:00-05:00&subject=Mproject&teacher_id={{ session['teacher_id'] }}"><button class="lecture-time">G2 <br> Mproject <br> Project I/C <br> CC Lab 3</button></a>        
+                
+        
+        </div>
+        <br>
+
+   </div>
+
+
+   <div id="wednesday" class="schedule" style="display: none;">
+    <h3>Wednesday's Lectures</h3>
+   <!-- <ul> 
+       <li>9:00 AM - Mathematics</li>
+       <li>11:00 AM - Computer Science</li>
+   </ul>-->
+
+   <a href="/generate-code?time=09:00-10:00&subject=AI&teacher=Ms.Abhilasha&teacher_id={{ session['teacher_id'] }}"><button class="lecture-time"><h4>09:00 - 10:00 </h4> <br> AI <br> Ms.Abhilasha <br> G-304</button></a>
+   <br>
+
+   <a href="/generate-code?time=10:00-11:00&subject=ML&teacher=Ms.Bindu&teacher_id={{ session['teacher_id'] }}"><button class="lecture-time"><h4>10:00 - 11:00 </h4> <br> ML <br> Ms.Bindu <br> G-304</button></a>
+   <br>
+
+   <div class="lab">
+    <h4>11:00 - 01:00</h4>
+
+    <a href="/generate-code?time=11:00-10:00&subject=Mproject&teacher_id={{ session['teacher_id'] }}"><button class="lecture-time">G1 <br> Mproject <br> Project I/O <br> CC Lab 2</button></a>        
+
+    <a href="/generate-code?time=11:00-01:00&subject=AI Lab&teacher=Ms.Meenu&teacher_id={{ session['teacher_id'] }}"><button class="lecture-time">G2 <br> AI_LAb <br> Ms.Meenu <br> CC Lab 3</button></a>        
+    
+            
+    
+    </div>
+    <br>
+
+    <a href="/generate-code?time=02:00-03:00&subject=Android&teacher=Ms.Meenu&teacher_id={{ session['teacher_id'] }}"><button class="lecture-time"><h4>02:00 - 03:00</h4> <br> Android <br> Ms. Meenu <br> G-304</button></a>
+   <br>
+
+   <div class="lab">
+    <h4>03:00 - 05:00</h4>
+
+    <a href="/generate-code?time=03:00-05:00&subject=AI&teacher=Ms.Abhilasha&teacher_id={{ session['teacher_id'] }}"><button class="lecture-time">G1<br> AI <br> Ms.Abhilasha <br> CC Lab 4</button></a>
+    
+        <a href="/generate-code?time=03:00-05:00&subject=Android Lab&teacher=Ms.Meenu&teacher_id={{ session['teacher_id'] }}"><button class="lecture-time">G2<br> Android_Lab <br> Ms.Meenu <br> CC Lab 1</button></a>        
+                   
+    </div>
+    <br>
+
+   
+
+</div>
+<div id="thursday" class="schedule" style="display: none;">
+    <h3>Thursday's Lectures</h3>
+   <!-- <ul> 
+       <li>9:00 AM - Mathematics</li>
+       <li>11:00 AM - Computer Science</li>
+   </ul> -->
+   <a href="/generate-code?time=09:00-10:00&subject=MPD6&teacher=Ms.Reena Verma&teacher_id={{ session['teacher_id'] }}"><button class="lecture-time"><h4>09:00 - 10:00</h4> <br> MPD6 <br> {{ session['teacher_name'] }} <br> G-304</button></a>
+   <!-- <a href="/generate-code?time=09:00-10:00&subject=MPD6&teacher=Ms.Reena"><button class="lecture-time"><h4>09:00 - 10:00</h4> <br> MPD6 <br> Ms.Reena <br> G-304</button></a> -->
+   <br>
+
+   <a href="/generate-code?time=10:00-11:00&subject=Microprocessor&teacher=Mr.I Gill&teacher_id={{ session['teacher_id'] }}"><button class="lecture-time"><h4>10:00 - 11:00 </h4> <br> Microproseccor <br> Mr.I Gill <br> G-304</button></a>
+   <br>
+
+   <a href="/generate-code?time=11:00-12:00&subject=Android&teacher=Ms.Meenu&teacher_id={{ session['teacher_id'] }}"> <button class="lecture-time"><h4>11:00 - 12:00 </h4> <br> Android <br> Ms.Meenu <br> G-304</button></a>
+   <br>
+
+   <a href="/generate-code?time=12:00-01:00&subject=ML&teacher=Ms.Bindu&teacher_id={{ session['teacher_id'] }}"><button class="lecture-time"><h4>12:00 - 01:00</h4> <br> ML <br> Ms.Bindu <br> G-304</button></a>
+   <br>
+
+   <a href="/generate-code?time=02:00-03:00&subject=-x-&teacher=-x-"><button class="lecture-time"><h4>02:00 - 03:00<br>-x- </h4></button></a>
+   <br>
+
+   
+   <div class="lab">
+    <h4>03:00 - 05:00</h4>
+
+    <a href="/generate-code?time=03:00-05:00&subject=AI Lab&teacher=Ms.Abhilasha&teacher=Ms.Abhilasha&teacher_id={{ session['teacher_id'] }}"><button class="lecture-time">G1 <br> AI_LAb <br> Ms.Abhilasha <br> CC Lab 2</button></a>
+    
+        <a href="/generate-code?time=03:00-05:00&subject=ML Lab DBMS Lab&teacher=Ms.Bindu&teacher_id={{ session['teacher_id'] }}"><button class="lecture-time">G2 <br> ML_LAb DBMS Lab <br> Ms.Bindu <br> Computation Lab</button></a>        
+
+                   
+    </div>
+    <br>
+
+
+
+
+</div>
+<div id="friday" class="schedule" style="display: none;">
+    <h3>Friday's Lectures</h3>
+   <!-- <ul> 
+       <li>9:00 AM - Mathematics</li>
+       <li>11:00 AM - Computer Science</li>
+   </ul> -->
+
+   <a href="/generate-code?time=09:00-10:00&subject=-x-&teacher=-x-"><button class="lecture-time"><h4>09:00 - 10:00<br> -x- </h4></button></a>
+   <br>
+
+   <a href="/generate-code?time=10:00-11:00&subject=Microprocessor&teacher=Mr.I Gill&teacher_id={{ session['teacher_id'] }}"><button class="lecture-time"><h4>10:00 - 11:00</h4> <br> Microproseccor <br> Mr.I Gill <br> G-304</button></a>
+   <br>
+
+   <a href="/generate-code?time=11:00-12:00&subject=ML&teacher=Ms.Bindu&teacher_id={{ session['teacher_id'] }}"><button class="lecture-time"><h4>11:00 - 12:00</h4> <br> ML <br> Ms.Bindu <br> G-304</button></a>
+   <br>
+
+   <div class="lab">
+    <h4>12:00 - 01:00</h4>
+
+    <a href="/generate-code?time=12:00-01:00&subject=Mproject&teacher=Project I/C"><button class="lecture-time">G1 <br> Mproject <br> Project I/O <br> CC Lab 3</button></a>
+    
+        <a href="/generate-code?time=12:00-01:00&subject=AI Lab&teacher=Ms.Meenu&teacher_id={{ session['teacher_id'] }}"><button class="lecture-time">G2 <br> AI Lab <br> Ms.Meenu <br> CC Lab 4</button></a>        
+
+                   
+    </div>
+    <br>
+
+
+    <a href="/generate-code?time=02:00-03:00&subject=-x-&teacher=-x-"><button class="lecture-time"><h4>02:00 - 03:00 <br> -x-</h4></button></a>
+   <br>
+
+   <a href="/generate-code?time=03:00-04:00&subject=AI&teacher=Ms.Abhilasha&teacher_id={{ session['teacher_id'] }}"><button class="lecture-time"><h4>03:00 - 04:00</h4> <br> AI <br> Ms. Abhilasha <br> G-304</button></a>
+   <br>
+
+   <a href="/generate-code?time=04:00-05:00&subject=-x-&teacher=-x-"><button class="lecture-time"><h4>04:00 <br>-x-</h4></button></a>
+   <br>
+
+</div>
+ 
+
+
+    
+<script>
+        //Flash - msg  Auto-hide after 3 seconds
+      
+        setTimeout(function() {
+        let flashMessages = document.getElementsByClassName("flash-message");
+        for (let i = 0; i < flashMessages.length; i++) {
+            flashMessages[i].style.display = "none";
+        }
+    }, 3000);
+
+    function closeFlashMessage() {
+        let flashMessages = document.getElementsByClassName("flash-message");
+        for (let i = 0; i < flashMessages.length; i++) {
+            flashMessages[i].style.display = "none";
+        }
+    }
+
+    function showSchedule(day) {
+    // Hide all schedules first
+    let schedules = document.querySelectorAll('.schedule');
+    schedules.forEach(schedule => schedule.style.display = "none");
+
+    // Show the selected schedule
+    document.getElementById(day).style.display = "block";
+}
+
+
+// updae time or date in real time
+function updateTime() {
+        let now = new Date();
+        document.getElementById("current-time").innerHTML = now.toLocaleString();
+    }
+    setInterval(updateTime, 1000); // Update every second
+
+
+   // Open modal for profile picture preview
+   function openModal() {
+            let modal = document.getElementById("profilePicModal");
+            let modalImg = document.getElementById("profilePicPreview");
+            let profilePic = document.querySelector(".profile img");
+
+            modal.style.display = "block";
+            modalImg.src = profilePic.src;
+        }
+
+        function closeModal() {
+            let modal = document.getElementById("profilePicModal");
+            modal.style.display = "none";
+        }
+
+        document.querySelector(".profile img").addEventListener("click", openModal);
+
+
+        // expiry code timestamp countdown
+
+        function startCountdown(expiryTimestamp) {
+            let countdownDisplay = document.getElementById("countdown");
+            
+            function updateCountdown() {
+                let now = Math.floor(Date.now() / 1000);
+                let remainingTime = Math.floor(expiryTimestamp - now);
+
+                if (remainingTime <= 0) {
+                    countdownDisplay.innerHTML = "⏳ Code Expired!";
+                    return;
+                }
+
+                let minutes = Math.floor(remainingTime / 60);
+                let seconds = remainingTime % 60;
+                countdownDisplay.innerHTML = `Expires in: ${minutes}:${seconds.toString().padStart(2, '0')}`;
+            }
+
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        }
+
+        let expiryTime = parseInt(document.getElementById("expiry-time").textContent, 10);
+        if (expiryTime) startCountdown(expiryTime);
+
+
+        
+//   drop down scripts       
+  document.addEventListener('DOMContentLoaded', function () {
+    const btn = document.querySelector('.dropbtn');
+    const content = document.querySelector('.dropdown-content');
+
+    btn.addEventListener('click', function () {
+      content.classList.toggle('show');
+    });
+
+    // Close dropdown when clicking outside
+    window.addEventListener('click', function (e) {
+      if (!e.target.matches('.dropbtn')) {
+        content.classList.remove('show');
+      }
+    });
+  });
+
+    </script>
+</body>
+
+
+
+
+</html>

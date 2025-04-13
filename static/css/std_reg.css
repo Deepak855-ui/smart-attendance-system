@@ -1,0 +1,296 @@
+body {
+    background-image: url('../images/bgjpg.jpg'); /* Optional: Add a background image */
+     /* Optional: Add a background image */
+    background-size: cover; /* Cover the entire viewport */
+    background-position: center; /* Center the image */
+   
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+
+
+.form-container {
+    background-color: rgba(59, 154, 186, 0.336) ; /* White with 90% opacity */
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* 3D shadow effect */
+    width: 400px;
+    height:fit-content;
+    text-align: left;
+    margin-top: 5rem;
+    padding-top: 2rem;
+    backdrop-filter: blur(5px);
+    position: relative;
+    z-index: 2;
+    overflow: hidden; /* Ensure content stays inside the container */
+
+    
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    /* margin-top: 20px; */
+    color: white;
+    /* text-shadow: 0px 0px 5px 2px goldenrod; */
+
+    font-size: 3rem;
+    text-shadow: 0 0 10px white;
+}
+    /* color: #333; */
+
+
+label {
+    font-weight: bold;
+    margin-top: 10px;
+    display: block;
+    color: white;
+    font-size: large;
+    /* color: #555; */
+}
+input:hover,select:hover{
+    box-shadow: 0 0 10px 2px rgb(255, 255, 255);
+}  
+
+
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="password"],
+input[type="file"],
+select {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0 20px;
+    border: 1px solid #ccccccb8;
+    border-radius: 5px;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus,
+select:focus {
+    border-color: #007BFF; /* Change border color on focus */
+    outline: none; /* Remove default outline */
+}
+
+button[type="submit"] {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s;
+    font-size: 16px;
+    font-weight: bolder;
+    text-shadow: 0 0 5px white;
+
+    margin: 5px;
+}
+
+button:hover {
+    box-shadow: 0 0 10px 2px white;
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+button[type="button"] {
+    background-color: #28a745; /* Green for Send OTP */
+}
+
+button[type="button"]:hover {
+    box-shadow: 0 0 10px 2px white;
+    background-color: #218838; /* Darker green on hover */
+}
+
+
+img:hover{
+    box-shadow: 0 0 10px 2px white;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.input-group input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccccccb8;
+    border-radius: 5px;
+}
+
+.input-group button {
+    position: absolute;
+    right: 5px;
+    padding: 8px 12px;
+    border: none;
+    background-color: #007BFF;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.input-group button:hover {
+    background-color: #0056b3;
+}
+
+.otp-verified {
+    background-color: lightgreen !important;
+    padding: 5px;
+    border-radius: 5px;
+    display: none;
+    text-align: center;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.otp-failed {
+    background-color: lightcoral !important;
+}
+.hidden {
+    display: none;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
+}
+
+.loader {
+    border: 6px solid #f3f3f3;
+    border-top: 6px solid #3498db;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    /* display: none;
+    margin-left: 10px; */
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ✅ The animated loader icon (static in center) */
+.loader-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(45deg, #a4508b, #ff6347);
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+/* ✅ Outer rotating ring */
+.loader-ring {
+    width: 80px;
+    height: 80px;
+    border: 5px solid transparent;
+    border-top: 5px solid #ff6347;
+    border-bottom: 5px solid #a4508b;
+    border-radius: 50%;
+    position: absolute;
+    animation: rotate 1s linear infinite;
+}
+
+/* ✅ Keyframes for rotation */
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+@media(max-width:480px){
+    body{
+        display: block;
+        padding: 0px;
+    }
+    .form-container{
+        padding: 0px;
+    }
+}
+
+@media (max-width: 600px) {
+    body {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px;
+        background-position: top;
+        background-size: cover;
+    }
+
+    .form-container {
+        width: 100%;
+        max-width: 95%;
+        margin: 2rem auto;
+        padding: 20px 15px;
+        box-shadow: none;
+        border-radius: 10px;
+    }
+
+    h1 {
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    input[type="password"],
+    input[type="file"],
+    select,
+    button[type="submit"],
+    button[type="button"] {
+        font-size: 1rem;
+        padding: 12px;
+        width: -webkit-fill-available;
+    }
+
+    .input-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .input-group input {
+        margin-bottom: 10px;
+    }
+
+    .input-group button {
+        position: static;
+        width: 100%;
+    }
+
+    .otp-verified,
+    .otp-failed {
+        font-size: 0.9rem;
+        padding: 8px;
+    }
+}
