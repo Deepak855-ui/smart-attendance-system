@@ -1025,7 +1025,7 @@ def get_attendance_count():
         cursor = db.cursor()
 
         # Fetch teacher's subject
-        cursor.execute("SELECT subjects FROM teachers WHERE id = %s", (teacher_id,))
+        cursor.execute("SELECT subject FROM teachers WHERE id = %s", (teacher_id,))
         teacher_subject = cursor.fetchone()
         
         if not teacher_subject:
