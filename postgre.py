@@ -975,6 +975,8 @@ def submit_attendance():
     datetime_value = request.form['datetime']
     teacher_id = session.get('teacher_id')  # Get teacher_id from session
 
+    print("Received form data:", request.form)  # Debugging output
+
 
     if subject in generated_codes:
         stored_code = generated_codes[subject]['code']
@@ -1054,7 +1056,77 @@ def get_attendance_count():
         return jsonify({'error': str(e)}), 500
 
 
+# def get_attendance_count():
+    if 'teacher_id' not in session:
+        return jsonify({'error': 'Unauthorized access'}), 403  
 
+    selected_date = request.args.get('date')
+    teacher_id = session['teacher_id']
+
+    if not selected_date:
+        return jsonify({'error': 'No date provided'}), 400
+
+    try:
+        cursor = db.cursor()
+
+        # Fetch teacher's subject
+        cursor.execute("SELECT subjects FROM teachers WHERE id = %s", (teacher_id,))
+        teacher_subject = cursor.fetchone()
+        
+        if not teacher_subject:
+            print("🔴 Error: No subject found for teacher_id:", teacher_id)  # Debugging output
+            return jsonify({'error': 'Teacher subject not found'}), 404
+        
+        teacher_subject = teacher_subject[0]  # Extract subject
+
+        # Debugging output
+        print(f"✅ Teacher id  {teacher_id} Teacher is teaching {teacher_subject}")
+
+        print(f"Checking attendance count for date: {selected_date}, subject: {teacher_subject}")
+        cursor.execute("SELECT student_name, subject, date FROM attendance WHERE DATE(date) = DATE(%s)", (selected_date,))
+        rows = cursor.fetchall()
+        print("📋 All subjects found on selected date:")
+        for row in rows:
+          print(row)
+
+
+        cursor.execute("""
+          SELECT COUNT(*) 
+           FROM attendance 
+          WHERE DATE(date) = %s AND subject = %s AND status = 'Present'
+        """, (selected_date, teacher_subject))
+
+       
+        print(f"SQL query ran for: selected_date={selected_date}, subject={teacher_subject}")
+        # Count attendance for this teacher's subject on the selected date
+        # cursor.execute("SELECT COUNT(*) FROM attendance WHERE DATE(date) = DATE(%s) AND subject = %s", 
+        #                (selected_date, teacher_subject))
+        count = cursor.fetchone()
+
+        attendance_count = count[0] if count else 0
+
+        if count is None:
+            print("🔴 Error: No attendance records found for", selected_date, "and subject:", teacher_subject)
+            return jsonify({'count': 0})  # Return 0 if no attendance found
+        
+        print(f"✅ Attendance Count for {teacher_subject} on {selected_date} -> {count[0]}")
+        print(f"✅ Present students for {teacher_subject} on {selected_date} -> {attendance_count}")
+
+        return jsonify({'count': attendance_count})
+
+    except Exception as e:
+        print("🔴 Error Fetching Attendance Count:", str(e))  # Print exact error
+        return jsonify({'error': str(e)}), 500
+
+
+
+def get_db_cursor():
+    try:
+        db.ping(reconnect=True)  # reconnect if connection is lost
+        return db.cursor()
+    except Exception as e:
+        print("🔴 DB Reconnection failed:", str(e))
+        raise
 
 
 # download attendance report

@@ -242,17 +242,37 @@ th {
 function updateAttendanceCount() {
     let selectedDate = document.getElementById("date").value;
     if (!selectedDate) return;
+
+        // ✅ Extra Safety: Ensure selectedDate is in YYYY-MM-DD
+    // If it's not (e.g., DD-MM-YYYY), convert it manually
+    if (selectedDate.includes('-')) {
+        const parts = selectedDate.split('-');
+        // If day is first (DD-MM-YYYY), convert it to YYYY-MM-DD
+        if (parts[0].length === 2 && parts[2].length === 4) {
+            selectedDate = `${parts[2]}-${parts[1]}-${parts[0]}`;  // Convert to YYYY-MM-DD
+        }
+    }
     
     fetch(`/get_attendance_count?date=${selectedDate}`)
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+          })
         .then(data => {
+            console.log("Live Count Response:", data); // ← Debug
             if (data.count !== undefined) {
                 document.getElementById("attendance-count").innerText = data.count;
             } else {
                 document.getElementById("attendance-count").innerText = "Error";
             }
         })
-        .catch(error => console.error("Error fetching attendance count:", error));
+        .catch(error =>{
+         console.error("Error fetching attendance count:", error);
+         document.getElementById("attendance-count").innerText = "Error";
+        });
+
 }
 
 // Auto-update if today’s date is selected
