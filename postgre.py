@@ -56,6 +56,15 @@ db = pymysql.connect(
                      )
 cursor = db.cursor()
 
+
+def get_db_cursor():
+    try:
+        db.ping(reconnect=True)  # reconnect if connection is lost
+        return db.cursor()
+    except Exception as e:
+        print("🔴 DB Reconnection failed:", str(e))
+        raise
+
 # ✅ **Upload Folder for Profile Pictures**
 UPLOAD_FOLDER = 'static/uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -1122,14 +1131,6 @@ def get_attendance_count():
         return jsonify({'error': str(e)}), 500
 
 
-
-def get_db_cursor():
-    try:
-        db.ping(reconnect=True)  # reconnect if connection is lost
-        return db.cursor()
-    except Exception as e:
-        print("🔴 DB Reconnection failed:", str(e))
-        raise
 
 
 # download attendance report
