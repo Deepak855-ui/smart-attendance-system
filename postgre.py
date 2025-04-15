@@ -40,6 +40,9 @@ def teacher_registration():
 def student_registration():
     return render_template('student_registration.html')
 
+@app.route('/document')
+def document():
+    return render_template('document.html')
 
 # ✅ **Database Configuration**
 db = pymysql.connect(
